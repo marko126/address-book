@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- ======== @Region: #highlighted ======== -->
+    <div id="highlighted">
+        <div class="container">
+            <div class="header">
+                <h2 class="page-title">
+                    <span>Add person</span>
+                    <small>Add new person to address book</small>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+    <div class="container portfolio">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/algolia-autocomplete.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+<script src="{{ asset('js/algolia-autocomplete.js') }}"></script>
+{% endblock %}

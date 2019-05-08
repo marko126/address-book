@@ -1,3 +1,26 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+homepage:
+    path:       /
+    defaults:   { _controller: AppBundle:Default:index }
+    
+person_list:
+    path:       /people.{_format}
+    defaults:   { _controller: AppBundle:Person:index }
+
+person_create:
+    path:       /person/create
+    defaults:   { _controller: AppBundle:Person:create }
+    
+person_edit:
+    path:       /person/edit/{id}
+    defaults:   { _controller: AppBundle:Person:edit }
+    requirements:
+        id:     '\d+'
+        
+person_delete:
+    path:       /person/delete}
+    defaults:   { _controller: AppBundle:Person:delete }
+    methods:     POST
+
+person_get_zip_code_cities_api:
+    path:       /person/getzipcodecitiesapi
+    defaults:   { _controller: AppBundle:Person:getzipcodecitiesapi }

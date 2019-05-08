@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2277e44fe7b30d2e4eb726dec46bea8b",
+    "content-hash": "38f5f8fe7f167715ccb9a6235c06ed24",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1581,6 +1581,70 @@
                 "mailer"
             ],
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "symfony-bundle/bootstrapselect-bundle",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-bundle/bootstrapselect-bundle.git",
+                "reference": "8040678b2c59214066aba6c0be0e008800b97302"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-bundle/bootstrapselect-bundle/zipball/8040678b2c59214066aba6c0be0e008800b97302",
+                "reference": "8040678b2c59214066aba6c0be0e008800b97302",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "incenteev/composer-parameter-handler": "~2.0",
+                "phpunit/phpunit": "~4.4",
+                "sensio/distribution-bundle": "~3.0",
+                "sensio/framework-extra-bundle": "~3.0",
+                "symfony-bundle/bootstrap-bundle": "~3.2",
+                "symfony-bundle/highlight-bundle": "~1.0",
+                "symfony-bundle/zeroclipboard-bundle": "*",
+                "symfony/assetic-bundle": "~2.5",
+                "symfony/symfony": "~2.6",
+                "twig/extensions": "~1.2",
+                "version/version": "~2.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony-app-dir": "app",
+                "symfony-web-dir": "web",
+                "incenteev-parameters": {
+                    "file": "app/config/parameters.yml"
+                },
+                "jquery-version": "*",
+                "zeroclipboard-version": ">1.0",
+                "bootstrapselect-version": "*"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Anezi\\Bundle\\BootstrapSelectBundle": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hassan AMOUHZI",
+                    "email": "hassan@amouhzi.com"
+                }
+            ],
+            "description": "Bootstrap-select Bundle",
+            "homepage": "http://symfony.anezi.net/bootstrapselect-bundle",
+            "keywords": [
+                "bootstrap",
+                "select"
+            ],
+            "time": "2014-12-17T00:48:56+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
