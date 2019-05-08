@@ -1,26 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block page_title %}
+    <h2 class="page-title">
+        <span>Add person</span>
+        <small>Add new person to address book</small>
+    </h2>
+{% endblock %}
+
 {% block body %}
-    <!-- ======== @Region: #highlighted ======== -->
-    <div id="highlighted">
-        <div class="container">
-            <div class="header">
-                <h2 class="page-title">
-                    <span>Add person</span>
-                    <small>Add new person to address book</small>
-                </h2>
-            </div>
-        </div>
-    </div>
     <div id="content">
-    <div class="container portfolio">
-        <div class="row">
-            <div class="col-md-6">
-                {{ form(form) }}
+        <div class="container portfolio">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form(form) }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block stylesheets %}

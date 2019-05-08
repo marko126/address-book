@@ -179,6 +179,14 @@ class Person
     {
         return $this->lastName;
     }
+    
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 
     /**
      * Set street

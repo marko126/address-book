@@ -90,6 +90,8 @@ class PersonController extends Controller {
             
             $em->flush();
             
+            $this->addFlash("success", "New contact person {$person->getFullName()} has been added successfully!");
+            
             return $this->redirectToRoute('person_list', ['_format' => 'html']);
             
         }
@@ -126,6 +128,8 @@ class PersonController extends Controller {
             
             $em->flush();
             
+            $this->addFlash("success", "The contact person {$person->getFullName()} has been changed successfully!");
+            
             return $this->redirectToRoute('person_list', ['_format' => 'html']);
             
         }
@@ -152,16 +156,15 @@ class PersonController extends Controller {
         $em->flush();
         
         $return = [
-            'status' => 200,
-            'message' => 'Person has been successfully deleted!'
+            'status' => 200
         ];
         
-        if ($request->isXMLHttpRequest()) {         
+        if ($request->isXMLHttpRequest()) {   
+            $this->addFlash("success", "The contact person {$person->getFullName()} has been removed successfully!");
             return new JsonResponse($return, 200);
         }
 
         return new Response('This is not ajax!', 400);
-        //return $this->redirectToRoute('person_list', ['_format' => 'html']);
     }
 
 
