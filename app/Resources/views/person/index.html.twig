@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Contact list{% endblock %}
+
 {% block page_title %}
     <h2 class="page-title">
-        <span>People list</span>
+        <span>Contact list</span>
     </h2>
 {% endblock %}
 
@@ -13,10 +15,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>
-                        List of people in address book
+                        List of all contacts in address book
                         <a href="{{ path('person_create') }}" class="pull-right btn btn-success">
                             <i class="fa fa-plus-circle"></i>
-                            New Person
+                            New Contact
                         </a>
                     </h2>
                 </div>
@@ -100,7 +102,7 @@
             {data: "email"},
             {
                 render: function (data, type, full, meta) {
-                    return "<td class='text-center'><div class='btn-group'><a class='btn btn-default' href='{{ path("person_edit", {"id": 1}) }}'><i class='fa fa-pencil'></i></a><button class='btn btn-default' data-id='" + full.id + "' data-action='delete'><i class='fa fa-trash'></i></button></div></td>";
+                    return "<td class='text-center'><div class='btn-group'><a class='btn btn-default' href='/person/edit/" + full.id + "'><i class='fa fa-pencil'></i></a><button class='btn btn-default' data-id='" + full.id + "' data-action='delete'><i class='fa fa-trash'></i></button></div></td>";
                 }
             }
         ]

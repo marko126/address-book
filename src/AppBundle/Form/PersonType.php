@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use AppBundle\Form\ZipCitySelectType;
 
 class PersonType extends AbstractType {
@@ -28,6 +28,13 @@ class PersonType extends AbstractType {
                 ->add('email', EmailType::class)
                 ->add('phoneNumber', TelType::class)
                 ->add('birthday', BirthdayType::class)
+                ->add('picture', FileType::class, [
+                    'required' => false,
+                    "data_class" => null,
+                    "attr" => [
+                        'accept'=>"image/*"
+                    ]
+                ])
                 ->add('save', SubmitType::class, ['label' => 'Save']);
     }
     

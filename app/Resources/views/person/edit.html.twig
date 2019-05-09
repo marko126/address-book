@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Edit contact{% endblock %}
+
 {% block page_title %}
     <h2 class="page-title">
-        <span>Edit person</span>
+        <span>Edit contact</span>
     </h2>
 {% endblock %}
 
@@ -10,6 +12,11 @@
     <div id="content">
         <div class="container portfolio">
             <div class="row">
+                <div class="col-md-12">
+                    {% if person.picture %}
+                         <img id="logo-img" src="{{ asset('upload/images/' ~ person.picture) }}" />
+                    {% endif %}
+                </div>
                 <div class="col-md-6">
                     {{ form(form) }}
                 </div>
@@ -21,6 +28,12 @@
 {% block stylesheets %}
 <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/algolia-autocomplete.css') }}" rel="stylesheet">
+<style>
+    #logo-img {
+        max-width: 150px;
+        margin: 10px 0 20px ;
+    }
+</style>
 {% endblock %}
 
 {% block javascripts %}

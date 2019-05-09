@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Intl\Intl;
+use AppBundle\Services\FileUploader;
 use AppBundle\Form\PersonType;
 use AppBundle\Repository\CityZipRepository;
 
@@ -55,13 +56,9 @@ class PersonController extends Controller {
             }
 
             return new JsonResponse($return);
-            
         }
         
         $repository = $this->getDoctrine()->getRepository(Person::class);
-        
-        ///print_r($repository->findAll());
-        //die();
         
         return $this->render('person/index.html.twig', [
             'people' => $repository->findAll()
@@ -72,28 +69,36 @@ class PersonController extends Controller {
      * @param Request $request
      * @return type
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request, FileUploader $fileUploader) {
         
         $person = new Person();
         
         $form = $this->createForm(PersonType::class, $person);
-        
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             
             $person = $form->getData();
             
+            $file = $person->getPicture();
+            
+            if ($file) {
+                $fileName = $fileUploader->upload($file);
+            
+                if ($fileName) {
+                    $person->setPicture($fileName);
+                } else {
+                    $this->addFlash("warning", "Something went wrong when you try to upload the picture!");
+                }
+            }
+            
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($person);
-            
             $em->flush();
             
             $this->addFlash("success", "New contact person {$person->getFullName()} has been added successfully!");
             
             return $this->redirectToRoute('person_list', ['_format' => 'html']);
-            
         }
         
         return $this->render('person/create.html.twig', [
@@ -106,36 +111,47 @@ class PersonController extends Controller {
      * @param int $id
      * @return type
      */
-    public function editAction(Request $request, int $id) {
+    public function editAction(Request $request, int $id, FileUploader $fileUploader) {
         
         $em = $this->getDoctrine()->getManager();
-        
         $repository = $em->getRepository('AppBundle:Person');
-        
         $person = $repository->find($id);
         
         if (empty($person)) {
             return $this->redirectToRoute('person_list', ['_format' => 'html']);
         }
         
+        $oldPicture = $person->getPicture();
         $form = $this->createForm(PersonType::class, $person);
-        
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             
             $person = $form->getData();
             
+            $file = $person->getPicture();
+            if ($file) {
+                $fileName = $fileUploader->upload($file);
+                if ($fileName) {
+                    $person->setPicture($fileName);
+                    $fileUploader->delete($oldPicture);
+                } else {
+                    $this->addFlash("warning", "Something went wrong when you try to upload the picture!");
+                }
+            } else {
+                $person->setPicture($oldPicture);
+            }
+            
             $em->flush();
             
             $this->addFlash("success", "The contact person {$person->getFullName()} has been changed successfully!");
             
             return $this->redirectToRoute('person_list', ['_format' => 'html']);
-            
         }
         
         return $this->render('person/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'person' => $person
         ]);
     }
     
@@ -144,13 +160,19 @@ class PersonController extends Controller {
      * @param int $id
      * @return type
      */
-    public function deleteAction(Request $request) {
+    public function deleteAction(Request $request, FileUploader $fileUploader) {
+        
+        //print_r($request);
+        //die();
+        
+        if (!$request->isXMLHttpRequest()) {
+            return new Response('This is not ajax!', 400);
+        }
         
         $em = $this->getDoctrine()->getManager();
-        
         $repository = $em->getRepository('AppBundle:Person');
-        
         $person = $repository->find($request->request->get('id'));
+        $fileUploader->delete($person->getPicture());
         
         $em->remove($person);
         $em->flush();
@@ -163,8 +185,6 @@ class PersonController extends Controller {
             $this->addFlash("success", "The contact person {$person->getFullName()} has been removed successfully!");
             return new JsonResponse($return, 200);
         }
-
-        return new Response('This is not ajax!', 400);
     }
 
 

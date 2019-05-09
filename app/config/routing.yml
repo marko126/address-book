@@ -17,7 +17,7 @@ person_edit:
         id:     '\d+'
         
 person_delete:
-    path:       /person/delete}
+    path:       /person/delete
     defaults:   { _controller: AppBundle:Person:delete }
     methods:     POST
 
