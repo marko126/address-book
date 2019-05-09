@@ -28,4 +28,4 @@ Then it will open http://127.0.0.1:8000 and the application will be running.
 
 ## To Run Tests
 
-`php vendor/bin/phpunit`
+`vendor/bin/simple-phpunit`
